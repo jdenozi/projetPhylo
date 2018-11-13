@@ -12,6 +12,7 @@ class node:
             return false
         else:
             return true
+
     def isLeaf():
         if self.enfants:
             return false
