@@ -2,24 +2,30 @@
 #-*- coding Utf-8 -*-
 
 import sys,os,re
-import node.py
-
+from node import*
 os.system('clear')
 
 with open("gene_tree.nwk") as f:
     arbre = f.read()
 f.close()
-def creationArbre(arbre, niveau = 0, index = 0)
-    listeEnfants =[]
-    i = arbre.length()-1
-    while i > 0 :
-        if arbre[i] == ':':
-        else if arbre[i] == ')' :
-            generation = generation+1
-            listeEnfants.append(node(gen=generation, enfants = creationArbre(arbre, index = i+1, niveau = generation)
-        else if i == '('
-            generation = generation-1
-        else if i == ','
-            listeNodes.append(node(gen=generation)
-
+i = len(arbre)-2
+root = node()
+#root = node(gen=0, name = "root")
+def creationArbre(arbre, parent, niveau, index):
+    if index >=0 :
+        listeEnfants =[]
+        if arbre[index]==')': #création enfant 
+            #listeEnfants.append(node(gen=generation, parent = parent, enfants = creationArbre(arbre, generation+1, i-1)))
+            print(')')
+        elif arbre[index] == '(' :#sortie de la fratrie
+            #generation = generation-1
+            print('(')
+        elif arbre[index] == ',' :# nouveau frère
+            print(',')
+            #parent.enfants.append(node(gen=generation, parent = parent))
+        index-=1
+        creationArbre(arbre, parent, niveau, index)
+        return (listeEnfants) 
+    return None
+root.enfants = creationArbre(arbre, root, 1, i)
 print (arbre)
