@@ -4,28 +4,31 @@
 import sys,os,re
 from node import*
 os.system('clear')
+os.system('rm arbre.nwk')
 
 with open("gene_tree.nwk") as f:
     arbre = f.read()
 f.close()
-i = len(arbre)-2
+i = len(arbre)-1
 root = node()
 #root = node(gen=0, name = "root")
 def creationArbre(arbre, parent, niveau, index):
     if index >=0 :
         listeEnfants =[]
+        i=arbre[index]
         if arbre[index]==')': #création enfant 
-            #listeEnfants.append(node(gen=generation, parent = parent, enfants = creationArbre(arbre, generation+1, i-1)))
-            print(')')
+            listeEnfants.append(node(gen=niveau, parent = parent, enfants = creationArbre(arbre, parent, niveau+1, index-1)))
         elif arbre[index] == '(' :#sortie de la fratrie
-            #generation = generation-1
-            print('(')
+            niveau -= niveau
         elif arbre[index] == ',' :# nouveau frère
-            print(',')
-            #parent.enfants.append(node(gen=generation, parent = parent))
+            parent.enfants.append(node(gen=niveau, parent = parent))
+        os.system("echo -n \"%s\" >> arbre.nwk" %i)
         index-=1
         creationArbre(arbre, parent, niveau, index)
         return (listeEnfants) 
     return None
 root.enfants = creationArbre(arbre, root, 1, i)
+
+def parcoursArbre(root):
+    print (parcours)
 print (arbre)
