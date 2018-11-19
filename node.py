@@ -22,5 +22,5 @@ class node:
             return True
 
     def __repr__(self):
-                return("{} {} {} {}".format
+                return("nom({}) generation({}) enfants({}) parents({})".format
                 (self.name, self.gen, self.enfants, self.parent))
