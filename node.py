@@ -3,7 +3,7 @@
 
 
 class node:
-    def _init_(self, **kwargs):
+    def __init__(self, **kwargs):
         self.name = kwargs.get('name')
         self.parent = kwargs.get('parent')
         self.enfants = kwargs.get('enfants')
@@ -20,3 +20,7 @@ class node:
             return False
         else:
             return True
+
+    def __repr__(self):
+                return("{} {} {} {}".format
+                (self.name, self.gen, self.enfants, self.parent))

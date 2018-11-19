@@ -14,7 +14,9 @@ def creationArbre(arbre, parent, niveau, index):
     if index >= 0:
         listeEnfants = []
         if arbre[index] == ')':  # création enfant
-            listeEnfants.append(node(gen=niveau, parent=parent, enfants=creationArbre(arbre, parent, niveau + 1, index - 1)))
+            listeEnfants.append(node(
+                gen=niveau, parent=parent, enfants=
+                creationArbre(arbre, parent, niveau + 1, index - 1)))
             print(listeEnfants)
         elif arbre[index] == '(':  # sortie de la fratrie
             niveau -= niveau
