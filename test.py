@@ -12,4 +12,4 @@ gene_tree = g.read()
 for i in spec_tree:
     if (i == "'"):
         #appel de substring typical jusqu'au prochain '
-    #comparaison de la substring 
+    #comparaison de la substring
