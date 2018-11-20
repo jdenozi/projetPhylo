@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from node import *
-from newickParser import *
-print("bob")
-#with open("gene_tree.nwk") as f:
-    #arbre = f.read()
-#f.close()
-#i = len(arbre) - 1
-root = node(name="root", gen=0)
+import node
+import newickParser
 
+print("start")
+arbregene = newickParser.lectureArbre("gene_tree.nwk")
+print(arbregene)
+index = len(arbregene) - 1
+print(index)
+root = node(name="root", enfants=[], gen=0)
 print(root)
-print("test")
-root.enfants = creationArbre(arbre, root, 1, i)
+newickParser.creationArbre(root, 0)
 print("fin")

@@ -5,30 +5,52 @@ import sys,os,re
 from node import*
 os.system('clear')
 os.system('rm arbre.nwk')
-
-
 #root = node(gen=0, name = "root")
 
 
-def creationArbre(arbre, parent, niveau, index):
-    if index >= 0:
-        listeEnfants = []
+def lectureArbre(fichier):
+    with open(fichier) as f:
+        arbre.read(f)
+    print("f")
+    return arbre
+
+
+def creationArbre(parent, niveau):
+    global index
+    listeEnfants = []
+    strtmp = ""
+    print("debut creation")
+    print (index)
+    while index >= 0:
+        #if arbre[index] == ';':
+            #index -= 1
+            #return (node(gen=0, name="root", enfants=creationArbre(self, 1)))
         if arbre[index] == ')':  # création enfant
-            listeEnfants.append(node(
-                gen=niveau, parent=parent, enfants=
-                creationArbre(arbre, parent, niveau + 1, index - 1)))
-            print(listeEnfants)
+            print(")")
+            index -= 1
+            listeEnfants.append(node(gen=niveau, parent=parent, enfants=
+            creationArbre(parent, niveau + 1)))
+        elif arbre[index] == ',':  # création frère(s)
+            parent.enfants[-1].name = strtmp
+            strtmp = ""
+            listeEnfants.append(node(gen=niveau, parent=parent, enfants=
+            creationArbre(parent, niveau + 1)))
         elif arbre[index] == '(':  # sortie de la fratrie
+            parent.enfants[-1].name = strtmp
+            strtmp = ""
+            index -= 1
             niveau -= niveau
-        elif arbre[index] == ',':  # nouveau frère
-            parent.enfants.append(node(gen=niveau, parent=parent))
-        # os.system("echo -n \"%s\" >> arbre.nwk" % i)
-        index -= 1
-        creationArbre(arbre, parent, niveau, index)
-        return (listeEnfants)
-    return None
+            retun(listeEnfants)
+        elif arbre[index] == ':':
+            parent.distance = strtmp
+            strtmp = ""
+            index -= 1
+        else:
+            strtmp = strtmp + (arbre[index])
+            index -= 1
 
 
 def parcoursArbre(root):
-    print (parcours)
-
+    print(root)
+    for i in root.enfants:
+        parcoursArbre(i)

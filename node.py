@@ -8,6 +8,7 @@ class node:
         self.parent = kwargs.get('parent')
         self.enfants = kwargs.get('enfants')
         self.gen = kwargs.get('gen')
+        self.dist = kwargs.get('dist')
 
     def isRoot(self):
         if self.parent:
