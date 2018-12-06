@@ -23,5 +23,5 @@ class node:
             return True
 
     def __repr__(self):
-                return("nom({}) generation({}) enfants({}) parents({})".format
-                (self.name, self.gen, self.enfants, self.parent))
+                return("nom({}) generation({}) enfants({})".format
+                (self.name, self.gen, self.enfants,))
