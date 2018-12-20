@@ -17,36 +17,30 @@ def lectureArbre(fichier):
 
 def creationArbre(parent, niveau, arbre):
     global index
-    listeEnfants = []
     strtmp = ""
-    print("appel fonction")
     while index >= 0:
         print ("indice {} niveau {}".format(index, niveau))
-        print (arbre[index])
+        #print (arbre[index])
         #if arbre[index] == ';':
             #index -= 1
             #return (node(gen=0, name="root", enfants=creationArbre(self, 1)))
         if arbre[index] == ')':  # création enfant
             index -= 1
-            listeEnfants.append(node(name="parenttest", gen=niveau, parent=parent,))
-            listeEnfants[-1].enfants=creationArbre(listeEnfants[-1], niveau+1, arbre)
-            #listeEnfants.append(node(name=parent, gen=niveau, parent=parent, enfants=
-            #creationArbre(parent, niveau+1, arbre)))
+            parent.enfants.append(
+                node(name="test", gen=niveau + 1, parent=parent, enfants=[]))
+            print(parent.enfants[-1].name)
+            creationArbre(parent.enfants[-1], niveau + 1, arbre)
+            print(parent.parent)
+            print(niveau)
         elif arbre[index] == ',':  # création frère(s)
-            #parent.enfants[-1].name = strtmp
             strtmp = ""
             index -= 1
-            print("deuxième enfant")
-            print(parent)
-            #parent.enfants.append(node(gen=niveau, parent=parent, enfants=
-            #creationArbre(parent, niveau + 1, arbre)))
+            parent.parent.enfants.append(
+                node(name="frere", gen=niveau, parent=parent, enfants=[]))
         elif arbre[index] == '(':  # sortie de la fratrie
-            #parent.enfants[-1].name = strtmp
             strtmp = ""
             index -= 1
-            niveau -= 1
-            print(listeEnfants)
-            return(listeEnfants)
+            return
         elif arbre[index] == ':':
             #parent.distance = strtmp
             strtmp = ""
@@ -57,7 +51,7 @@ def creationArbre(parent, niveau, arbre):
 
 
 def parcoursArbre(root):
-    print(root)
     if (not root.isLeaf()):
         for i in root.enfants:
             parcoursArbre(i)
+            print(i)
